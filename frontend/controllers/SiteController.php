@@ -210,4 +210,12 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+    
+    public function actionLista()
+    {
+        $records = User::find()->all();
+        return $this->render('lista',[
+            'records'=>$records
+        ]);
+    }
 }

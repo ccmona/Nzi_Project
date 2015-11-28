@@ -20,6 +20,11 @@ return [
                 ],
             ],
         ],
+        //'request' => [
+        //    'enableCookieValidation' => true,
+        //    'enableCsrfValidation' => true,
+        //    'cookieValidationKey' => 'I-love-Yii2',
+        //],
     ],
     'params' => $params,
 ];
