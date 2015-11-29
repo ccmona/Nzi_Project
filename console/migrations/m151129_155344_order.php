@@ -2,28 +2,31 @@
 
 use yii\db\Migration;
 
-class m151123_145655_test2 extends Migration
+class m151129_155344_order extends Migration
 {
     public function up()
     {
-        //$this->execute('');
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
             // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-        
-        $this->createTable('{{%koszyk}}', [
-            'id' => $this->primaryKey(),
-            'id_prod' => $this->integer()->notNull(),
-            'date' => $this->integer()->notNull(),
+
+        $this->createTable('{{%order}}', [
+            'order_id' => $this->primaryKey(),
+            'user_id' => $this->integer(11)->notNull(),
+            'date_time' => $this->datetime()->notNull(),
         ], $tableOptions);
-                
+        
+        $this->addForeignKey('user_id','{{%order}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
+        //$this->addForeignKey('fk_id','{{%user}}', 'id', '{{%order}}', 'order_id', 'CASCADE', 'CASCADE');        
     }
 
     public function down()
     {
-        echo "m151123_145655_test2 cannot be reverted.\n";
+        
+        $this->dropTable("order");
+        echo "m151129_155344_order cannot be reverted.\n";
 
         return false;
     }

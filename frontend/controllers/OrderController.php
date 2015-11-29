@@ -5,11 +5,13 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use frontend\models\Order;
 use common\models\User;
+
 /**
  * Site controller
  */
-class UserController extends Controller
+class OrderController extends Controller
 {
     /**
      * @inheritdoc
@@ -20,10 +22,13 @@ class UserController extends Controller
     }
     
     public function actionLista()
-    {
-        $records = User::find()->all();
+    {   
+        $Orders = Order::find()->all();
+        $Users = User::find()->all();
+
         return $this->render('lista',[
-            'records'=>$records
+            'Orders'=>$Orders,
+            'Users'=>$Users
         ]);
     }
 }
