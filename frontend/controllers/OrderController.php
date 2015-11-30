@@ -9,7 +9,7 @@ use frontend\models\Order;
 use common\models\User;
 
 /**
- * Site controller
+ * Order controller
  */
 class OrderController extends Controller
 {
@@ -23,12 +23,11 @@ class OrderController extends Controller
     
     public function actionLista()
     {   
-        $Orders = Order::find()->all();
-        $Users = User::find()->all();
-
+        $order = new Order();
+        $Orders = $order->getUserandOrders();
+         
         return $this->render('lista',[
             'Orders'=>$Orders,
-            'Users'=>$Users
         ]);
     }
 }

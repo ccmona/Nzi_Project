@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\base\Model;
 
 /**
  * This is the model class for table "order".
@@ -54,5 +55,10 @@ class Order extends \yii\db\ActiveRecord
     public function getOrder()
     {
         return $this->hasOne(User::className(), ['id' => 'order_id']);
+    }
+    
+    public function getUserandOrders()
+    {
+        return $this->getDb()->createCommand('SELECT * FROM `order` INNER JOIN user ON `order`.user_id = user.id GROUP BY order_id')->queryAll();
     }
 }

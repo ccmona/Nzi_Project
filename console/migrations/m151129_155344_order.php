@@ -6,6 +6,9 @@ class m151129_155344_order extends Migration
 {
     public function up()
     {
+        
+        $this->dropTable("order");
+        
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
@@ -18,13 +21,14 @@ class m151129_155344_order extends Migration
         ], $tableOptions);
         
         $this->addForeignKey('user_id','{{%order}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
-        //$this->addForeignKey('fk_id','{{%user}}', 'id', '{{%order}}', 'order_id', 'CASCADE', 'CASCADE');        
-    }
+        
+        $this->addColumn("user",'privilege', 'integer');
+   }
 
     public function down()
     {
         
-        $this->dropTable("order");
+        //$this->dropTable("order");
         echo "m151129_155344_order cannot be reverted.\n";
 
         return false;
